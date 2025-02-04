@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_broadcast_action_tree" model="ir.ui.view">
+        <field name="name">Broadcast Action Tree</field>
+        <field name="model">broadcast.action</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="template"/>
+                <field name="start_at"/>
+                <field name="end_at"/>
+                <!-- <field name="status"/> -->
+                <!-- <field name="status" widget="statusbar" statusbar_visible="0,1"/> -->
+                <!-- <field name="recurring_period"/> -->
+                <field name="contact_source"/>
+                <!-- <field string="Status"/> -->
+                <button name="action_start" string="Start" type="object" class="btn-primary" 
+                        invisible="status ==  1"/>
+                <button name="action_stop" string="Stop" type="object" class="btn-secondary" 
+                        invisible="status ==  0"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_broadcast_action_form" model="ir.ui.view">
+        <field name="name">Broadcast Action Form</field>
+        <field name="model">broadcast.action</field>
+        <field name="arch" type="xml">
+              <form string="Broadcast Action">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="template"/>
+                        <field name="start_at"/>
+                        <field name="end_at"/>
+                        <!-- <field name="recurring_period"/> -->
+                        <field name="contact_source"/>
+                        
+
+                        <!-- Dynamically Show CRM Tags -->
+                        <field name="crm_tag_ids" invisible="crm_tags_visible == False"/>
+
+                        <!-- Dynamically Show CSV Upload based on contact_source -->
+                        <field name="csv_file" invisible="csv_upload_visible == False" />
+
+                        <field name="contact_csv" invisible="csv_upload_visible == False"/>
+                        
+                        <!-- <field name="csv_filename" invisible="csv_upload_visible == False"/> -->
+                        <field name="header_text_sample" invisible="show_header_text_sample == False"/>
+                      
+                        <field name="body_sample" nolabel="1" 
+                            invisible="show_body_sample == False">
+                            <list editable="bottom">
+                                <field name="name" string="Text Field"/>
+                            </list>
+                            
+                        </field>
+                    
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_broadcast_action" model="ir.actions.act_window">
+        <field name="name">Broadcast Actions</field>
+        <field name="res_model">broadcast.action</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
