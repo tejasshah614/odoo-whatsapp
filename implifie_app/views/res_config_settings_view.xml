@@ -1,0 +1,47 @@
+<odoo>
+    <data>
+        <!-- ✅ Step 1: Ensure "Technical" Menu Exists -->
+        <menuitem id="menu_technical_root" name="Technical"
+                  parent="base.menu_administration" sequence="5"
+                  groups="base.group_system"/>
+
+        <!-- ✅ Step 2: Create "WhatsApp Configuration" Under Technical -->
+        <menuitem id="menu_whatsapp_configuration" name="WhatsApp Configuration"
+                  parent="menu_technical_root" sequence="10"
+                  groups="base.group_system"/>
+
+        <!-- ✅ Step 3: Move "Implifie" Under WhatsApp Configuration -->
+        <menuitem id="menu_implifie_root" name="Implifie"
+                  parent="menu_whatsapp_configuration"
+                  action="implifie_config_settings_action"
+                  sequence="15"
+                  groups="base.group_system"/>
+
+        <!-- ✅ Step 4: Action to Open "Implifie Settings" -->
+        <record id="implifie_config_settings_action" model="ir.actions.act_window">
+            <field name="name">Implifie Settings</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="context">{'module': 'implifie_app', 'bin_size': False}</field>
+        </record>
+
+        <!-- ✅ Step 5: Form View for Implifie API Token -->
+        <record id="view_res_config_settings_implifie" model="ir.ui.view">
+            <field name="name">res.config.settings.implifie</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <notebook>
+                        <page string="Implifie Settings">
+                            <group>
+                                <field name="implifie_api_token" placeholder="Enter Implifie API Token"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,34 @@
+<odoo>
+    <record id="view_whatsapp_chat" model="ir.ui.view">
+        <field name="name">whatsapp.chat.view</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form string="WhatsApp Chat" class="o_form_full_width">
+                <sheet>
+                    <div class="o_whatsapp_chat_container">
+                        <!-- Left Sidebar (Contacts List) -->
+                        <div class="o_whatsapp_sidebar">
+                            <div class="o_sidebar_header">Contacts</div>
+                            <div id="contact_list" class="o_contact_list">
+                                <!-- Contacts will be dynamically loaded -->
+                            </div>
+                        </div>
+
+                        <!-- Right Chat Panel (Messages) -->
+                        <div class="o_whatsapp_chat">
+                            <div id="chat_messages" class="o_chat_messages">
+                                <!-- Chat messages will be dynamically loaded here -->
+                            </div>
+
+                            <!-- Message Input -->
+                            <div class="o_chat_input_container">
+                                <input type="text" id="message_input" placeholder="Type a message..." class="o_chat_input"/>
+                                <button id="send_button" class="o_chat_send_button">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
